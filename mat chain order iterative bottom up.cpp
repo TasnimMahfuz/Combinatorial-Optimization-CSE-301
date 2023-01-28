@@ -12,6 +12,7 @@ void matChain(int p[],int len)
     for(int i = 1;i <= n; i++)
         m[i][i] = 0;
 
+    /*
     for(int l = 2; l <= n; l++)
     {
         for(int i = 1; i <= n + 1 - l ; i++)
@@ -30,6 +31,32 @@ void matChain(int p[],int len)
                 }
             }
         }
+    }*/
+
+    for(int lim = n - 1,incFactor = 1; lim >= 1; lim--)
+    {
+        //int incFactor = 1; made a bug here!
+
+        for(int i = 1; i <= lim; i++)
+        {
+            int j = i + incFactor;
+            m[i][j] = 666666;//
+
+            for(int k = i; k <= j - 1; k++)
+            {
+                int q = m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j];
+
+                if(q < m[i][j])
+                {
+                    m[i][j] = q;
+                    s[i][j] = k;
+                }
+                //cout<<i<<"\t"<<j<<"\t"<<incFactor<<endl;
+            }
+        }
+
+
+        incFactor++;
     }
 }
 
